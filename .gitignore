@@ -1,0 +1,20 @@
+# Backend
+backend/target/
+backend/*.db
+backend/*.db-journal
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+

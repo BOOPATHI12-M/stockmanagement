@@ -1,0 +1,26 @@
+{
+  "name": "venom-whatsapp-server",
+  "version": "1.0.0",
+  "description": "Venom WhatsApp HTTP API server for Java Spring Boot integration",
+  "main": "venom-server.js",
+  "scripts": {
+    "start": "node venom-server.js",
+    "dev": "nodemon venom-server.js"
+  },
+  "keywords": [
+    "whatsapp",
+    "venom",
+    "bot",
+    "api"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "venom-bot": "^5.0.3",
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
