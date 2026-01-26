@@ -46,13 +46,15 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 // Allow OPTIONS requests for CORS preflight (must be first)
                 .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
+                // Public endpoints
+                .requestMatchers("/").permitAll() // Allow root path
+                .requestMatchers("/error").permitAll()
                 .requestMatchers("/api/auth/admin/login").permitAll() // Allow login for admin and delivery man
                 .requestMatchers("/api/auth/admin/proof-documents/**").authenticated() // Allow authenticated users to view proof documents
                 .requestMatchers("/api/auth/admin/**").hasRole("ADMIN") // Other admin-only auth endpoints
                 .requestMatchers("/api/auth/**").permitAll() // Public auth endpoints (profile endpoints require auth via JWT filter)
                 .requestMatchers("/api/products").permitAll()
-                .requestMatchers("/api/products/images/**").permitAll()
-                .requestMatchers("/api/products/upload").authenticated()
+                .requestMatchers("/api/products/**").permitAll() // Allow public access to all product endpoints
                 .requestMatchers("/api/auth/profile/photo/**").permitAll() // Allow public access to profile photos
                 .requestMatchers("/api/reviews/product/**").permitAll() // Allow public access to view reviews
                 .requestMatchers("/api/reviews/**").authenticated() // Require auth for adding/deleting reviews
@@ -68,7 +70,6 @@ public class SecurityConfig {
                 // Admin-only report endpoints
                 .requestMatchers("/api/reports/**").hasRole("ADMIN")
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                .requestMatchers("/error").permitAll()
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
