@@ -48,6 +48,7 @@ public class SecurityConfig {
                 .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
                 // Public endpoints
                 .requestMatchers("/").permitAll() // Allow root path
+                .requestMatchers("/health").permitAll() // Health check endpoint
                 .requestMatchers("/error").permitAll()
                 .requestMatchers("/api/auth/admin/login").permitAll() // Allow login for admin and delivery man
                 .requestMatchers("/api/auth/admin/proof-documents/**").authenticated() // Allow authenticated users to view proof documents
