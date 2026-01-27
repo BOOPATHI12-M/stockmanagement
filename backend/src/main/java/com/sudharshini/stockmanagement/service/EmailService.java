@@ -34,8 +34,8 @@ public class EmailService {
     @Value("${MAIL_FROM:${MAIL_USERNAME:}}")
     private String mailFrom;
     
-    public EmailService(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
+    public EmailService(@org.springframework.beans.factory.annotation.Autowired(required = false) JavaMailSender mailSender) {
+        this.mailSender = mailSender; // may be null if mail starter not configured
     }
     
     /**
@@ -149,6 +149,14 @@ public class EmailService {
             return;
         }
         // Fallback to SMTP
+        if (mailSender == null) {
+            // no SMTP available; rely on SendGrid path
+            if (sendGridAvailable()) {
+                sendViaSendGrid(to, subject, body);
+                return;
+            }
+            throw new IllegalStateException("No email transport configured: missing SENDGRID_API_KEY and JavaMailSender");
+        }
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(mailFrom);
         message.setTo(to);
