@@ -2,10 +2,18 @@ import axios from 'axios'
 
 // Use environment variable for API URL
 // Development: uses Vite proxy (/api)
-// Production: uses VITE_API_BASE_URL from .env.production (must include /api path)
+// Production: uses VITE_API_BASE_URL from .env.production
+// Fallback: uses deployed backend URL
 const API_BASE_URL = import.meta.env.DEV 
   ? '/api' 
-  : import.meta.env.VITE_API_BASE_URL
+  : (import.meta.env.VITE_API_BASE_URL || 'https://stockmanagement-1-ca4p.onrender.com/api')
+
+// Debug log to verify URL is correct
+if (typeof window !== 'undefined') {
+  console.log('🔗 API_BASE_URL:', API_BASE_URL)
+  console.log('📦 VITE_API_BASE_URL:', import.meta.env.VITE_API_BASE_URL)
+  console.log('🔧 DEV mode:', import.meta.env.DEV)
+}
 
 const api = axios.create({
   baseURL: API_BASE_URL,
