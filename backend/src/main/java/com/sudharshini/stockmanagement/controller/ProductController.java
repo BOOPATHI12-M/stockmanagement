@@ -35,7 +35,6 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping("/api/products")
-@CrossOrigin(origins = "*")
 public class ProductController {
     
     @Autowired
