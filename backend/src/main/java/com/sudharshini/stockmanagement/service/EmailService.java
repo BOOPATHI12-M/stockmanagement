@@ -2,6 +2,13 @@ package com.sudharshini.stockmanagement.service;
 
 import com.sudharshini.stockmanagement.entity.Order;
 import com.sudharshini.stockmanagement.entity.Product;
+import com.sendgrid.Method;
+import com.sendgrid.Request;
+import com.sendgrid.Response;
+import com.sendgrid.SendGrid;
+import com.sendgrid.helpers.mail.Mail;
+import com.sendgrid.helpers.mail.objects.Content;
+import com.sendgrid.helpers.mail.objects.Email;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -19,6 +26,13 @@ public class EmailService {
     
     @Value("${admin.email}")
     private String adminEmail;
+
+    // SendGrid configuration from environment (optional). When present, we use HTTP API.
+    @Value("${SENDGRID_API_KEY:}")
+    private String sendGridApiKey;
+
+    @Value("${MAIL_FROM:${MAIL_USERNAME:}}")
+    private String mailFrom;
     
     public EmailService(JavaMailSender mailSender) {
         this.mailSender = mailSender;
@@ -29,11 +43,9 @@ public class EmailService {
      */
     @Async
     public void sendOrderConfirmation(Order order) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(order.getDeliveryEmail());
-        message.setSubject("Order Confirmation - " + order.getOrderNumber());
-        message.setText(buildOrderConfirmationBody(order));
-        mailSender.send(message);
+        sendEmail(order.getDeliveryEmail(),
+                "Order Confirmation - " + order.getOrderNumber(),
+                buildOrderConfirmationBody(order));
     }
     
     /**
@@ -42,13 +54,11 @@ public class EmailService {
      */
     @Async
     public void sendOrderStatusUpdate(Order order) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(order.getDeliveryEmail());
-        message.setSubject("Order Status Update - " + order.getOrderNumber());
-        message.setText(buildOrderStatusUpdateBody(order));
         try {
-            mailSender.send(message);
-            System.out.println("✅ Email status update sent for Order #" + order.getOrderNumber() + " - Status: " + order.getStatus());
+            sendEmail(order.getDeliveryEmail(),
+                    "Order Status Update - " + order.getOrderNumber(),
+                    buildOrderStatusUpdateBody(order));
+            System.out.println("✅ Email status update queued for Order #" + order.getOrderNumber() + " - Status: " + order.getStatus());
         } catch (Exception e) {
             System.err.println("❌ Failed to send email status update: " + e.getMessage());
             e.printStackTrace();
@@ -60,11 +70,9 @@ public class EmailService {
      */
     @Async
     public void sendLowStockAlert(Product product) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(adminEmail);
-        message.setSubject("Low Stock Alert – " + product.getName());
-        message.setText(buildLowStockBody(product));
-        mailSender.send(message);
+        sendEmail(adminEmail,
+                "Low Stock Alert – " + product.getName(),
+                buildLowStockBody(product));
     }
     
     /**
@@ -72,11 +80,9 @@ public class EmailService {
      */
     @Async
     public void sendExpiryAlert(Product product) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(adminEmail);
-        message.setSubject("Product Expiring Soon – " + product.getName());
-        message.setText(buildExpiryBody(product));
-        mailSender.send(message);
+        sendEmail(adminEmail,
+                "Product Expiring Soon – " + product.getName(),
+                buildExpiryBody(product));
     }
     
     private String buildOrderConfirmationBody(Order order) {
@@ -122,16 +128,61 @@ public class EmailService {
      * Send OTP email to user (synchronous for immediate feedback)
      */
     public void sendOtpEmail(String email, String otpCode) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(email);
-        message.setSubject("Your OTP for Sudharshini Stock Management");
-        message.setText(buildOtpBody(otpCode));
         try {
-            mailSender.send(message);
+            sendEmail(email,
+                    "Your OTP for Sudharshini Stock Management",
+                    buildOtpBody(otpCode));
         } catch (Exception e) {
             System.err.println("Failed to send OTP email: " + e.getMessage());
             e.printStackTrace();
             throw new RuntimeException("Failed to send OTP email: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Unified email sender. Uses SendGrid HTTP API when SENDGRID_API_KEY is present,
+     * otherwise falls back to JavaMailSender (SMTP).
+     */
+    private void sendEmail(String to, String subject, String body) {
+        if (sendGridAvailable()) {
+            sendViaSendGrid(to, subject, body);
+            return;
+        }
+        // Fallback to SMTP
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(mailFrom);
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(body);
+        mailSender.send(message);
+    }
+
+    private boolean sendGridAvailable() {
+        return sendGridApiKey != null && !sendGridApiKey.isBlank();
+    }
+
+    private void sendViaSendGrid(String to, String subject, String body) {
+        try {
+            Email fromEmail = new Email(mailFrom == null || mailFrom.isBlank() ? "no-reply@sudharshini.com" : mailFrom);
+            Email toEmail = new Email(to);
+            Content content = new Content("text/plain", body);
+            Mail mail = new Mail(fromEmail, subject, toEmail, content);
+
+            SendGrid sg = new SendGrid(sendGridApiKey);
+            Request request = new Request();
+            request.setMethod(Method.POST);
+            request.setEndpoint("mail/send");
+            request.setBody(mail.build());
+            Response response = sg.api(request);
+
+            if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
+                System.out.println("📧 SendGrid: Email sent successfully (" + response.getStatusCode() + ")");
+            } else {
+                System.err.println("⚠️ SendGrid: Failed to send email (" + response.getStatusCode() + ") - " + response.getBody());
+            }
+        } catch (Exception ex) {
+            System.err.println("❌ SendGrid error: " + ex.getMessage());
+            throw new RuntimeException("SendGrid email send failed", ex);
         }
     }
     
