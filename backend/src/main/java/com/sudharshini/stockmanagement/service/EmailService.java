@@ -22,7 +22,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailService {
     
-    private final JavaMailSender mailSender;
+    @org.springframework.beans.factory.annotation.Autowired(required = false)
+    private JavaMailSender mailSender;
     
     @Value("${admin.email}")
     private String adminEmail;
@@ -34,8 +35,8 @@ public class EmailService {
     @Value("${MAIL_FROM:${MAIL_USERNAME:}}")
     private String mailFrom;
     
-    public EmailService(@org.springframework.beans.factory.annotation.Autowired(required = false) JavaMailSender mailSender) {
-        this.mailSender = mailSender; // may be null if mail starter not configured
+    public EmailService() {
+        // default constructor
     }
     
     /**
@@ -150,11 +151,6 @@ public class EmailService {
         }
         // Fallback to SMTP
         if (mailSender == null) {
-            // no SMTP available; rely on SendGrid path
-            if (sendGridAvailable()) {
-                sendViaSendGrid(to, subject, body);
-                return;
-            }
             throw new IllegalStateException("No email transport configured: missing SENDGRID_API_KEY and JavaMailSender");
         }
         SimpleMailMessage message = new SimpleMailMessage();
