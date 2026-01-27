@@ -2,10 +2,10 @@ import axios from 'axios'
 
 // Use environment variable for API URL
 // Development: uses Vite proxy (/api)
-// Production: uses VITE_API_BASE_URL from .env.production
+// Production: uses VITE_API_BASE_URL from .env.production (must include /api path)
 const API_BASE_URL = import.meta.env.DEV 
   ? '/api' 
-  : `${import.meta.env.VITE_API_BASE_URL}/api`
+  : import.meta.env.VITE_API_BASE_URL
 
 const api = axios.create({
   baseURL: API_BASE_URL,
