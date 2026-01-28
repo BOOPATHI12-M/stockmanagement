@@ -339,7 +339,7 @@ export default function Home() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-20">
       {/* Search and Filter Section */}
       <div className="mb-8 space-y-4">
         <div className="flex flex-col md:flex-row gap-4">
@@ -457,11 +457,11 @@ export default function Home() {
           )}
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredProducts.map(product => (
-            <div key={product.id} className="rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300" style={{ background: 'rgba(30, 41, 59, 0.8)', border: '1px solid rgba(6, 182, 212, 0.2)' }}>
+            <div key={product.id} className="bg-gray-900 rounded-xl p-3 shadow-md hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300" style={{ border: '1px solid rgba(6, 182, 212, 0.2)' }}>
               {product.imageUrl ? (
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-40 sm:h-48 overflow-hidden rounded-lg">
                   <img 
                     src={product.imageUrl} 
                     alt={product.name}
@@ -469,21 +469,21 @@ export default function Home() {
                   />
                 </div>
               ) : (
-                <div className="h-48 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(8, 145, 178, 0.1) 100%)' }}>
+                <div className="h-40 sm:h-48 flex items-center justify-center rounded-lg" style={{ background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(8, 145, 178, 0.1) 100%)' }}>
                   <svg className="h-16 w-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'rgba(6, 182, 212, 0.5)' }}>
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                 </div>
               )}
-              <div className="p-5">
-                <h3 className="text-lg font-bold mb-2 line-clamp-1" style={{ color: '#fff' }}>{product.name}</h3>
+              <div className="mt-2">
+                <h3 className="text-sm sm:text-base font-bold mb-1 line-clamp-1" style={{ color: '#fff' }}>{product.name}</h3>
                 {product.description && (
-                  <p className="text-sm mb-3 line-clamp-2 min-h-[2.5rem]" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>{product.description}</p>
+                  <p className="text-xs sm:text-sm mb-2 line-clamp-2 min-h-[2rem]" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>{product.description}</p>
                 )}
                 
                 {/* Reviews Section */}
                 {productReviews[product.id] && (
-                  <div className="mb-3 flex items-center gap-2">
+                  <div className="mb-2 flex items-center gap-2">
                     {renderStars(Math.round(productReviews[product.id].averageRating || 0))}
                     <span className="text-sm" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                       ({productReviews[product.id].reviewCount || 0})
@@ -491,8 +491,8 @@ export default function Home() {
                   </div>
                 )}
                 
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-2xl font-extrabold" style={{ background: 'linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-lg sm:text-xl font-extrabold" style={{ background: 'linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                     ₹{product.price}
                   </span>
                   {product.category && (
@@ -505,7 +505,7 @@ export default function Home() {
                 {/* Review Button */}
                 <button
                   onClick={() => handleOpenReviewModal(product)}
-                  className="w-full mb-2 px-4 py-2 rounded-lg font-medium transition-all hover:opacity-80 flex items-center justify-center gap-2"
+                  className="w-full mb-2 px-3 py-2 text-sm rounded-lg font-medium transition-all hover:opacity-80 flex items-center justify-center gap-2"
                   style={{ 
                     background: 'rgba(6, 182, 212, 0.1)', 
                     border: '1px solid rgba(6, 182, 212, 0.3)',
@@ -521,9 +521,9 @@ export default function Home() {
                 {!isAdmin() && (
                   <>
                     {/* Quantity Selector */}
-                    <div className="mb-2 flex items-center gap-2">
-                      <label className="text-sm font-medium" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>Quantity:</label>
-                      <div className="flex items-center gap-2 flex-1">
+                    <div className="mb-2 flex flex-col sm:flex-row items-start sm:items-center gap-2">
+                      <label className="text-xs sm:text-sm font-medium" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>Qty:</label>
+                      <div className="flex items-center gap-2 flex-1 w-full sm:w-auto">
                         <button
                           onClick={() => {
                             const currentQty = productQuantities[product.id] || 1
@@ -532,7 +532,7 @@ export default function Home() {
                             }
                           }}
                           disabled={product.stockQuantity === 0 || (productQuantities[product.id] || 1) <= 1}
-                          className="px-3 py-1 rounded-lg font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="px-2 sm:px-3 py-1 text-sm rounded-lg font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                           style={{ 
                             background: 'rgba(6, 182, 212, 0.2)', 
                             border: '1px solid rgba(6, 182, 212, 0.3)',
@@ -550,7 +550,7 @@ export default function Home() {
                             const value = parseInt(e.target.value) || 1
                             handleQuantityChange(product.id, value)
                           }}
-                          className="w-16 px-2 py-1 text-center rounded-lg border-2 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                          className="w-12 sm:w-16 px-2 py-1 text-sm text-center rounded-lg border-2 focus:outline-none focus:ring-2 focus:ring-cyan-500"
                           style={{ 
                             background: 'rgba(30, 41, 59, 0.8)', 
                             borderColor: 'rgba(6, 182, 212, 0.3)',
@@ -567,7 +567,7 @@ export default function Home() {
                             }
                           }}
                           disabled={product.stockQuantity === 0 || (productQuantities[product.id] || 1) >= Math.min(product.stockQuantity || 100, 100)}
-                          className="px-3 py-1 rounded-lg font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="px-2 sm:px-3 py-1 text-sm rounded-lg font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                           style={{ 
                             background: 'rgba(6, 182, 212, 0.2)', 
                             border: '1px solid rgba(6, 182, 212, 0.3)',
@@ -583,7 +583,7 @@ export default function Home() {
                     <button
                       onClick={() => handleBuyNow(product)}
                       disabled={product.stockQuantity === 0 || !user}
-                      className="w-full mb-2 px-4 py-2 rounded-lg font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
+                      className="w-full mb-2 px-3 py-2 text-sm rounded-lg font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
                       style={{ 
                         background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)',
                         color: '#fff',
@@ -592,7 +592,7 @@ export default function Home() {
                     >
                       {!user ? (
                         <>
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                           </svg>
                           Login to Buy
@@ -613,7 +613,7 @@ export default function Home() {
                     <button
                       onClick={() => handleAddToCartWithQuantity(product)}
                       disabled={product.stockQuantity === 0 || !user}
-                      className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                      className="w-full btn-primary text-sm py-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                     >
                       {!user ? (
                         <span className="flex items-center justify-center">

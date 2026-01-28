@@ -217,8 +217,8 @@ export default function Login() {
   // Password setup screen
   if (showPasswordSetup && newUser) {
     return (
-      <div className="min-h-screen flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8" style={{ background: '#0f172a' }}>
-        <div className="max-w-md w-full space-y-8" style={{ background: 'rgba(30, 41, 59, 0.9)', padding: '2rem', borderRadius: '1rem', border: '2px solid #3b82f6' }}>
+      <div className="min-h-screen flex items-center justify-center py-4 px-4 sm:px-6 lg:px-8" style={{ background: '#0f172a' }}>
+        <div className="w-full max-w-sm sm:max-w-md space-y-6" style={{ background: 'rgba(30, 41, 59, 0.9)', padding: '1.5rem', borderRadius: '1rem', border: '2px solid #3b82f6' }}>
           <div className="text-center">
             <h2 className="text-3xl font-extrabold mb-2" style={{ color: '#fff' }}>
               user Verified!
@@ -239,9 +239,9 @@ export default function Login() {
                 required
                 value={passwordSetup.password}
                 onChange={(e) => setPasswordSetup({...passwordSetup, password: e.target.value})}
-                style={{ color: '#fff' }}
+                className="w-full bg-gray-800 text-white placeholder-gray-400 border border-gray-600 rounded-lg px-3 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:outline-none"
               />
-              <label>Password (min 6 characters)</label>
+              <label className="text-sm text-gray-300">Password (min 6 characters)</label>
             </div>
             <div className="input-box">
               <input
@@ -249,14 +249,14 @@ export default function Login() {
                 required
                 value={passwordSetup.confirmPassword}
                 onChange={(e) => setPasswordSetup({...passwordSetup, confirmPassword: e.target.value})}
-                style={{ color: '#fff' }}
+                className="w-full bg-gray-800 text-white placeholder-gray-400 border border-gray-600 rounded-lg px-3 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:outline-none"
               />
-              <label>Confirm Password</label>
+              <label className="text-sm text-gray-300">Confirm Password</label>
             </div>
             <button
               type="submit"
               disabled={loading}
-              className="login-btn"
+              className="w-full bg-cyan-600 hover:bg-cyan-700 text-white py-3 rounded-lg font-semibold transition-all disabled:opacity-50"
             >
               {loading ? 'Setting Password...' : 'Set Password & Continue'}
             </button>
@@ -269,8 +269,8 @@ export default function Login() {
   // OTP verification screen
   if (step === 'otp') {
     return (
-      <div className="min-h-screen flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8" style={{ background: '#0f172a' }}>
-        <div className="max-w-md w-full space-y-8" style={{ background: 'rgba(30, 41, 59, 0.9)', padding: '2rem', borderRadius: '1rem', border: '2px solid #3b82f6' }}>
+      <div className="min-h-screen flex items-center justify-center py-4 px-4 sm:px-6 lg:px-8" style={{ background: '#0f172a' }}>
+        <div className="w-full max-w-sm sm:max-w-md space-y-6" style={{ background: 'rgba(30, 41, 59, 0.9)', padding: '1.5rem', borderRadius: '1rem', border: '2px solid #3b82f6' }}>
           <div className="text-center">
             <h2 className="text-3xl font-extrabold mb-2" style={{ color: '#fff' }}>
               Verify OTP
@@ -357,7 +357,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading || formData.otp.length !== 6}
-              className="login-btn"
+              className="w-full bg-cyan-600 hover:bg-cyan-700 text-white py-3 rounded-lg font-semibold transition-all disabled:opacity-50"
             >
               {loading ? 'Verifying...' : 'Verify OTP'}
             </button>
@@ -391,7 +391,7 @@ export default function Login() {
 
   // Main animated login/register form
   return (
-    <div className="min-h-screen flex items-center justify-center py-4 px-4 sm:px-6 lg:px-8" style={{ background: '#25252b' }}>
+    <div className="min-h-screen flex items-center justify-center py-4 px-4" style={{ background: '#25252b' }}>
       <div className={`login-container ${containerActive ? 'active' : ''}`} style={{ margin: 'auto' }}>
         <div className="curved-shape"></div>
         <div className="curved-shape2"></div>

@@ -175,7 +175,7 @@ export default function Checkout() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-20">
       <div className="mb-8">
         <h1 className="text-4xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
           Checkout
@@ -288,11 +288,11 @@ export default function Checkout() {
             {/* Custom Address Form - Show only if useCustomAddress is true or no saved addresses */}
             {(useCustomAddress || addresses.length === 0) && (
               <div className="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Enter Delivery Address</h3>
+                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">Enter Delivery Address</h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-gray-700 mb-1">
                   Full Name
                 </label>
                 <input
@@ -301,13 +301,13 @@ export default function Checkout() {
                   value={formData.deliveryName}
                   onChange={handleChange}
                   required
-                  className="input-field"
+                  className="w-full bg-white text-gray-900 placeholder-gray-500 border-2 border-gray-300 rounded-lg px-3 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 focus:outline-none"
                   placeholder="Enter your full name"
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-gray-700 mb-1">
                   Email
                 </label>
                 <input
@@ -316,13 +316,13 @@ export default function Checkout() {
                   value={formData.deliveryEmail}
                   onChange={handleChange}
                   required
-                  className="input-field"
+                  className="w-full bg-white text-gray-900 placeholder-gray-500 border-2 border-gray-300 rounded-lg px-3 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 focus:outline-none"
                   placeholder="your@email.com"
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-gray-700 mb-1">
                   Mobile Number
                 </label>
                 <input
@@ -331,13 +331,13 @@ export default function Checkout() {
                   value={formData.deliveryMobile}
                   onChange={handleChange}
                   required
-                  className="input-field"
+                  className="w-full bg-white text-gray-900 placeholder-gray-500 border-2 border-gray-300 rounded-lg px-3 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 focus:outline-none"
                   placeholder="10-digit mobile number"
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-gray-700 mb-1">
                   Pincode
                 </label>
                 <input
@@ -346,14 +346,14 @@ export default function Checkout() {
                   value={formData.deliveryPincode}
                   onChange={handleChange}
                   required
-                  className="input-field"
+                  className="w-full bg-white text-gray-900 placeholder-gray-500 border-2 border-gray-300 rounded-lg px-3 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 focus:outline-none"
                   placeholder="6-digit pincode"
                 />
               </div>
             </div>
             
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <div className="mt-4">
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">
                     Delivery Address
                   </label>
                   <textarea
@@ -362,40 +362,27 @@ export default function Checkout() {
                     onChange={handleChange}
                     required={useCustomAddress || addresses.length === 0}
                     rows="4"
-                    className="input-field"
+                    className="w-full bg-white text-gray-900 placeholder-gray-500 border-2 border-gray-300 rounded-lg px-3 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 focus:outline-none"
                     placeholder="Enter your complete delivery address"
                   />
                 </div>
               </div>
             )}
             
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <div className="mt-4">
+              <label className="block text-sm font-semibold text-gray-700 mb-1">
                 Payment Mode
               </label>
               <select
                 name="paymentMode"
                 value={formData.paymentMode}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-lg focus:outline-none transition-all duration-200"
-                style={{ 
-                  background: '#ffffff',
-                  border: '2px solid rgba(6, 182, 212, 0.3)',
-                  color: '#1f2937'
-                }}
-                onFocus={(e) => {
-                  e.target.style.borderColor = '#06b6d4'
-                  e.target.style.boxShadow = '0 0 0 3px rgba(6, 182, 212, 0.1)'
-                }}
-                onBlur={(e) => {
-                  e.target.style.borderColor = 'rgba(6, 182, 212, 0.3)'
-                  e.target.style.boxShadow = 'none'
-                }}
+                className="w-full bg-white text-gray-900 border-2 border-gray-300 rounded-lg px-3 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 focus:outline-none"
               >
-                <option value="CASH_ON_DELIVERY" style={{ background: '#ffffff', color: '#1f2937' }}>Cash on Delivery</option>
-                <option value="ONLINE" style={{ background: '#ffffff', color: '#1f2937' }}>Online Payment</option>
-                <option value="UPI" style={{ background: '#ffffff', color: '#1f2937' }}>UPI</option>
-                <option value="CARD" style={{ background: '#ffffff', color: '#1f2937' }}>Card</option>
+                <option value="CASH_ON_DELIVERY">Cash on Delivery</option>
+                <option value="ONLINE">Online Payment</option>
+                <option value="UPI">UPI</option>
+                <option value="CARD">Card</option>
               </select>
             </div>
             
