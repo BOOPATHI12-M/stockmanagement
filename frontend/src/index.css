@@ -87,7 +87,9 @@ div[style*="background-color: white"][style*="font-weight: 500"] {
   .login-container {
     position: relative;
     width: 750px;
-    height: 450px;
+    max-width: 95vw;
+    height: auto;
+    min-height: 450px;
     border: 2px solid #06b6d4;
     box-shadow: 0 0 25px #06b6d4;
     overflow: hidden;
@@ -98,10 +100,12 @@ div[style*="background-color: white"][style*="font-weight: 500"] {
     top: 0;
     width: 50%;
     height: 100%;
+    min-height: 450px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     z-index: 5;
+    padding: 20px 0;
   }
 
   .form-box.Login {
@@ -471,56 +475,26 @@ div[style*="background-color: white"][style*="font-weight: 500"] {
   /* Responsive alignment fixes */
   @media (max-width: 1024px) {
     .login-container {
-      width: 95vw;
-      height: 90vh;
+      width: 90vw;
+      max-width: 700px;
+      min-height: 500px;
+      height: auto;
     }
     
     .form-box.Login {
+      padding: 30px 30px;
+    }
+    
+    .form-box.Register {
       padding: 30px 40px;
     }
     
-    .form-box.Register {
-      padding: 30px 50px;
-    }
-    
     .info-content.Login {
-      padding: 40px 40px 60px 100px;
+      padding: 40px 30px 60px 80px;
     }
     
     .info-content.Register {
-      padding: 40px 100px 60px 40px;
-    }
-    
-    .info-content h2 {
-      font-size: 36px;
-    }
-    
-    .form-box h2 {
-      font-size: 36px;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .login-container {
-      width: 98vw;
-      height: 95vh;
-      min-height: 500px;
-    }
-    
-    .form-box.Login {
-      padding: 20px 30px;
-    }
-    
-    .form-box.Register {
-      padding: 20px 40px;
-    }
-    
-    .info-content.Login {
-      padding: 30px 30px 50px 80px;
-    }
-    
-    .info-content.Register {
-      padding: 30px 80px 50px 30px;
+      padding: 40px 80px 60px 30px;
     }
     
     .info-content h2 {
@@ -528,11 +502,88 @@ div[style*="background-color: white"][style*="font-weight: 500"] {
     }
     
     .form-box h2 {
-      font-size: 32px;
+      font-size: 28px;
     }
     
     .info-content p {
       font-size: 14px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .login-container {
+      width: 95vw;
+      min-height: auto;
+      height: auto;
+      max-height: none;
+    }
+    
+    .login-container .form-box {
+      min-height: auto;
+      padding: 30px 0;
+    }
+    
+    .form-box.Login {
+      padding: 30px 25px;
+    }
+    
+    .form-box.Register {
+      padding: 30px 30px;
+    }
+    
+    /* Hide decorative elements on mobile */
+    .login-container .curved-shape,
+    .login-container .curved-shape2 {
+      display: none;
+    }
+    
+    /* Adjust info content on mobile */
+    .info-content {
+      display: none !important;
+    }
+    
+    /* Make form full width on mobile */
+    .login-container .form-box {
+      width: 100%;
+      position: relative;
+      left: 0 !important;
+      right: 0 !important;
+    }
+    
+    .form-box h2 {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+    
+    .form-box .input-box {
+      margin-top: 20px;
+    }
+    
+    .regi-link {
+      margin: 15px 0 10px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .login-container {
+      width: 100vw;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+    }
+    
+    .form-box.Login,
+    .form-box.Register {
+      padding: 25px 20px;
+    }
+    
+    .form-box h2 {
+      font-size: 24px;
+    }
+    
+    .login-btn {
+      height: 42px;
+      font-size: 15px;
     }
   }
 }

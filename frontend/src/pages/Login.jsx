@@ -217,13 +217,13 @@ export default function Login() {
   // Password setup screen
   if (showPasswordSetup && newUser) {
     return (
-      <div className="min-h-screen flex items-center justify-center py-4 px-4 sm:px-6 lg:px-8" style={{ background: '#0f172a' }}>
-        <div className="w-full max-w-sm sm:max-w-md space-y-6" style={{ background: 'rgba(30, 41, 59, 0.9)', padding: '1.5rem', borderRadius: '1rem', border: '2px solid #3b82f6' }}>
+      <div className="min-h-screen flex items-center justify-center py-6 px-4 sm:px-6 lg:px-8" style={{ background: '#0f172a' }}>
+        <div className="w-full max-w-sm sm:max-w-md space-y-4 sm:space-y-6" style={{ background: 'rgba(30, 41, 59, 0.9)', padding: '1.5rem', borderRadius: '1rem', border: '2px solid #3b82f6' }}>
           <div className="text-center">
-            <h2 className="text-3xl font-extrabold mb-2" style={{ color: '#fff' }}>
-              user Verified!
+            <h2 className="text-2xl sm:text-3xl font-extrabold mb-2" style={{ color: '#fff' }}>
+              User Verified!
             </h2>
-            <p className="text-sm mb-1" style={{ color: '#ccc' }}>
+            <p className="text-xs sm:text-sm mb-1" style={{ color: '#ccc' }}>
               Create a secure password for your account
             </p>
           </div>
@@ -232,16 +232,16 @@ export default function Login() {
             <div className="error-message">{error}</div>
           )}
           
-          <form onSubmit={handleSetPassword} className="space-y-6">
+          <form onSubmit={handleSetPassword} className="space-y-4 sm:space-y-6">
             <div className="input-box">
               <input
                 type="password"
                 required
                 value={passwordSetup.password}
                 onChange={(e) => setPasswordSetup({...passwordSetup, password: e.target.value})}
-                className="w-full bg-gray-800 text-white placeholder-gray-400 border border-gray-600 rounded-lg px-3 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:outline-none"
+                className="w-full bg-gray-800 text-white placeholder-gray-400 border border-gray-600 rounded-lg px-3 py-2.5 sm:py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:outline-none"
               />
-              <label className="text-sm text-gray-300">Password (min 6 characters)</label>
+              <label className="text-xs sm:text-sm text-gray-300">Password (min 6 characters)</label>
             </div>
             <div className="input-box">
               <input
@@ -249,14 +249,14 @@ export default function Login() {
                 required
                 value={passwordSetup.confirmPassword}
                 onChange={(e) => setPasswordSetup({...passwordSetup, confirmPassword: e.target.value})}
-                className="w-full bg-gray-800 text-white placeholder-gray-400 border border-gray-600 rounded-lg px-3 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:outline-none"
+                className="w-full bg-gray-800 text-white placeholder-gray-400 border border-gray-600 rounded-lg px-3 py-2.5 sm:py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:outline-none"
               />
-              <label className="text-sm text-gray-300">Confirm Password</label>
+              <label className="text-xs sm:text-sm text-gray-300">Confirm Password</label>
             </div>
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-cyan-600 hover:bg-cyan-700 text-white py-3 rounded-lg font-semibold transition-all disabled:opacity-50"
+              className="w-full bg-cyan-600 hover:bg-cyan-700 text-white py-2.5 sm:py-3 rounded-lg font-semibold transition-all disabled:opacity-50 text-sm sm:text-base"
             >
               {loading ? 'Setting Password...' : 'Set Password & Continue'}
             </button>
@@ -269,13 +269,13 @@ export default function Login() {
   // OTP verification screen
   if (step === 'otp') {
     return (
-      <div className="min-h-screen flex items-center justify-center py-4 px-4 sm:px-6 lg:px-8" style={{ background: '#0f172a' }}>
-        <div className="w-full max-w-sm sm:max-w-md space-y-6" style={{ background: 'rgba(30, 41, 59, 0.9)', padding: '1.5rem', borderRadius: '1rem', border: '2px solid #3b82f6' }}>
+      <div className="min-h-screen flex items-center justify-center py-6 px-4 sm:px-6 lg:px-8" style={{ background: '#0f172a' }}>
+        <div className="w-full max-w-sm sm:max-w-md space-y-4 sm:space-y-6" style={{ background: 'rgba(30, 41, 59, 0.9)', padding: '1.25rem sm:1.5rem', borderRadius: '1rem', border: '2px solid #3b82f6' }}>
           <div className="text-center">
-            <h2 className="text-3xl font-extrabold mb-2" style={{ color: '#fff' }}>
+            <h2 className="text-2xl sm:text-3xl font-extrabold mb-2" style={{ color: '#fff' }}>
               Verify OTP
             </h2>
-            <p className="text-sm mb-4" style={{ color: '#ccc' }}>
+            <p className="text-xs sm:text-sm mb-3 sm:mb-4 break-words" style={{ color: '#ccc' }}>
               We've sent a 6-digit OTP to <strong>{formData.email}</strong>
             </p>
           </div>
@@ -284,10 +284,10 @@ export default function Login() {
             <div className="error-message">{error}</div>
           )}
           
-          <form onSubmit={handleOtpVerify} className="space-y-5">
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
-              <label style={{ color: '#fff', fontSize: '14px', fontWeight: '600', marginBottom: '10px' }}>Enter OTP</label>
-              <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
+          <form onSubmit={handleOtpVerify} className="space-y-4 sm:space-y-5">
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
+              <label style={{ color: '#fff', fontSize: '13px', fontWeight: '600', marginBottom: '8px' }}>Enter OTP</label>
+              <div style={{ display: 'flex', gap: '6px', justifyContent: 'center', flexWrap: 'wrap' }}>
                 {[0, 1, 2, 3, 4, 5].map((index) => (
                   <input
                     key={index}
@@ -328,10 +328,10 @@ export default function Login() {
                     }}
                     id={`otp-${index}`}
                     style={{
-                      width: '50px',
-                      height: '60px',
+                      width: '45px',
+                      height: '52px',
                       textAlign: 'center',
-                      fontSize: '24px',
+                      fontSize: '20px',
                       fontWeight: 'bold',
                       color: '#fff',
                       background: 'rgba(255, 255, 255, 0.05)',
@@ -357,7 +357,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading || formData.otp.length !== 6}
-              className="w-full bg-cyan-600 hover:bg-cyan-700 text-white py-3 rounded-lg font-semibold transition-all disabled:opacity-50"
+              className="w-full bg-cyan-600 hover:bg-cyan-700 text-white py-2.5 sm:py-3 rounded-lg font-semibold transition-all disabled:opacity-50 text-sm sm:text-base"
             >
               {loading ? 'Verifying...' : 'Verify OTP'}
             </button>
@@ -367,7 +367,7 @@ export default function Login() {
             <button
               onClick={handleResendOtp}
               disabled={loading}
-              style={{ color: '#3b82f6', fontSize: '14px', background: 'none', border: 'none', cursor: 'pointer' }}
+              style={{ color: '#3b82f6', fontSize: '13px', background: 'none', border: 'none', cursor: 'pointer' }}
             >
               Resend OTP
             </button>
@@ -379,7 +379,7 @@ export default function Login() {
                 setFormData({...formData, otp: ''})
                 setError('')
               }}
-              style={{ color: '#ccc', fontSize: '14px', background: 'none', border: 'none', cursor: 'pointer' }}
+              style={{ color: '#ccc', fontSize: '13px', background: 'none', border: 'none', cursor: 'pointer' }}
             >
               ← Back to {mode === 'signup' ? 'Sign Up' : 'Sign In'}
             </button>
@@ -391,7 +391,7 @@ export default function Login() {
 
   // Main animated login/register form
   return (
-    <div className="min-h-screen flex items-center justify-center py-4 px-4" style={{ background: '#25252b' }}>
+    <div className="min-h-screen flex items-center justify-center py-6 px-2 sm:px-4" style={{ background: '#25252b' }}>
       <div className={`login-container ${containerActive ? 'active' : ''}`} style={{ margin: 'auto' }}>
         <div className="curved-shape"></div>
         <div className="curved-shape2"></div>
