@@ -83,7 +83,283 @@ div[style*="background-color: white"][style*="font-weight: 500"] {
     background: linear-gradient(135deg, #1e293b 0%, #25252b 50%, #1e293b 100%);
   }
 
-  /* Animated Login Form Styles */
+  /* ✅ NEW RESPONSIVE AUTH PAGE STRUCTURE */
+
+  /* Core Styles */
+  .auth-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    background: #0f172a;
+  }
+
+  .auth-card {
+    display: flex;
+    width: 100%;
+    max-width: 900px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #1f2933;
+    animation: fadeSlideUp 0.6s ease;
+  }
+
+  /* Left Panel - Welcome Section */
+  .auth-left {
+    flex: 1;
+    padding: 32px;
+    background: linear-gradient(180deg, #0ea5b7, #0b7285);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .auth-left h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .auth-left p {
+    font-size: 16px;
+    line-height: 1.6;
+    opacity: 0.95;
+  }
+
+  /* Right Panel - Form Section */
+  .auth-right {
+    flex: 1;
+    padding: 32px;
+    background: #1f2933;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .auth-right h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: #fff;
+  }
+
+  .auth-right input {
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(6, 182, 212, 0.3);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+
+  .auth-right input:focus {
+    outline: none;
+    border-color: #06b6d4;
+    background: rgba(6, 182, 212, 0.1);
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+  }
+
+  .auth-right input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* Button Styles */
+  .primary-btn {
+    width: 100%;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+    border: 2px solid #06b6d4;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 16px;
+  }
+
+  .primary-btn:hover {
+    background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+    border-color: #0891b2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
+  }
+
+  .primary-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .google-btn {
+    width: 100%;
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 12px;
+  }
+
+  .google-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+  }
+
+  .link {
+    font-size: 14px;
+    text-align: center;
+    margin-top: 12px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .link a {
+    color: #06b6d4;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .link a:hover {
+    text-decoration: underline;
+  }
+
+  .divider {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 16px;
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+
+  .error-message {
+    background: rgba(239, 68, 68, 0.1);
+    border-left: 4px solid #ef4444;
+    color: #fee;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 16px;
+    width: 100%;
+  }
+
+  /* ✨ ANIMATIONS */
+  @keyframes slideUp {
+    from {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideDown {
+    from {
+      transform: translateY(-30px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeSlideUp {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Desktop (≥768px) - Horizontal Layout */
+  @media (min-width: 768px) {
+    .auth-left {
+      animation: slideDown 0.6s ease;
+    }
+
+    .auth-right {
+      animation: slideUp 0.6s ease;
+    }
+  }
+
+  /* Mobile (<768px) - Vertical Layout */
+  @media (max-width: 767px) {
+    .auth-card {
+      flex-direction: column;
+      max-width: 420px;
+    }
+
+    .auth-left {
+      display: block;
+      text-align: center;
+      padding: 24px;
+      animation: slideDown 0.6s ease;
+    }
+
+    .auth-left h2 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .auth-left p {
+      font-size: 14px;
+    }
+
+    .auth-right {
+      padding: 24px;
+      animation: slideUp 0.6s ease;
+    }
+
+    .auth-right h2 {
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+
+    .auth-right input {
+      padding: 10px 14px;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .primary-btn,
+    .google-btn {
+      padding: 10px 20px;
+      font-size: 14px;
+      margin-top: 12px;
+    }
+
+    .divider {
+      margin-top: 12px;
+      margin-bottom: 10px;
+    }
+
+    .link {
+      margin-top: 10px;
+      font-size: 12px;
+    }
+  }
+
+  /* Legacy Login Container Styles (kept for compatibility) */
   .login-container {
     position: relative;
     width: 750px;
@@ -329,12 +605,6 @@ div[style*="background-color: white"][style*="font-weight: 500"] {
     top: 0;
   }
 
-  .login-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    pointer-events: none;
-  }
-
   .regi-link {
     font-size: 14px;
     text-align: center;
@@ -458,18 +728,6 @@ div[style*="background-color: white"][style*="font-weight: 500"] {
   .login-container.active .curved-shape2 {
     transform: rotate(-11deg) skewY(-41deg);
     transition-delay: 1.2s;
-  }
-
-  .error-message {
-    background: rgba(239, 68, 68, 0.1);
-    border-left: 4px solid #ef4444;
-    color: #fee;
-    padding: 12px;
-    border-radius: 4px;
-    font-size: 14px;
-    margin-top: 10px;
-    width: 100%;
-    text-align: left;
   }
 
   /* Responsive alignment fixes */
