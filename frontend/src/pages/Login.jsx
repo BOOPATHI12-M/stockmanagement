@@ -27,6 +27,17 @@ export default function Login() {
   const [otpSent, setOtpSent] = useState(false)
   const [containerActive, setContainerActive] = useState(false)
   const [animationComplete, setAnimationComplete] = useState(false)
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
+
+  // Detect screen size and handle responsive animation
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   // Sync container active state with mode
   useEffect(() => {
@@ -392,7 +403,7 @@ export default function Login() {
   // Main animated login/register form
   return (
     <div className="min-h-screen flex items-center justify-center py-6 px-2 sm:px-4" style={{ background: '#25252b' }}>
-      <div className={`login-container ${containerActive ? 'active' : ''}`} style={{ margin: 'auto' }}>
+      <div className={`login-container ${containerActive ? 'active' : ''} ${isMobile ? 'mobile-layout' : 'desktop-layout'}`} style={{ margin: 'auto' }}>
         <div className="curved-shape"></div>
         <div className="curved-shape2"></div>
         
