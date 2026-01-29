@@ -393,140 +393,105 @@ div[style*="background-color: white"][style*="font-weight: 500"] {
     border-radius: 16px;
   }
 
-  /* Form boxes */
-  .login-container .form-box {
-    position: absolute;
-    top: 0;
-    width: 50%;
-    height: 100%;
-    min-height: 450px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    z-index: 5;
-    padding: 20px 0;
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  /* 🎯 FIXED HEADER + ANIMATED FORM WRAPPER - No Jumping */
+
+  /* Fixed Header Section */
+  .login-header {
+    width: 100%;
+    padding: 24px 40px 16px 40px;
+    text-align: center;
+    z-index: 10;
+    position: relative;
+    background: transparent;
   }
 
-  /* Mobile: Form boxes become full width and stack */
-  .login-container.mobile-layout .form-box {
+  .login-container.mobile-layout .login-header {
+    padding: 20px 16px 12px 16px;
+  }
+
+  .login-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0.5px;
+    text-transform: capitalize;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .login-container.mobile-layout .login-title {
+    font-size: 24px;
+  }
+
+  /* Form Wrapper - Container for animated forms */
+  .form-wrapper {
     position: relative;
     width: 100%;
-    height: auto;
+    min-height: 280px;
+    overflow: hidden;
+    display: flex;
+  }
+
+  .login-container.mobile-layout .form-wrapper {
     min-height: auto;
-    padding: 24px 20px;
-    top: auto;
   }
 
-  .form-box.Login {
-    left: 0;
-    padding: 0 40px;
+  /* Individual Form Content */
+  .form-content {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    padding: 0 40px 20px 40px;
+  }
+
+  .form-content.active {
+    position: relative;
+    opacity: 1;
+    transform: translateX(0);
     pointer-events: auto;
   }
 
-  .login-container.mobile-layout .form-box.Login {
-    order: 2;
-    padding: 24px 20px;
-  }
-
-  .login-container.active .form-box.Login {
-    pointer-events: none;
-  }
-
-  .form-box.Login .animation {
-    transform: translateX(0%);
-    transition: 0.7s;
-    opacity: 1;
-    transition-delay: calc(0.1s * var(--S));
-  }
-
-  .login-container.active .form-box.Login .animation {
-    transform: translateX(-120%);
-    opacity: 0;
-    transition-delay: calc(0.1s * var(--D));
-  }
-
-  /* Mobile: Login form animations */
-  .login-container.mobile-layout .form-box.Login .animation {
+  .login-container.mobile-layout .form-content {
+    position: relative;
     transform: translateY(30px);
     opacity: 0;
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    transition-delay: calc(0.08s * var(--S));
+    padding: 0 16px 16px 16px;
   }
 
-  .login-container.mobile-layout.active .form-box.Login .animation {
+  .login-container.mobile-layout .form-content.active {
     transform: translateY(0);
     opacity: 1;
   }
 
-  .form-box.Register {
-    right: 0;
-    padding: 0 60px;
-    pointer-events: none;
-  }
-
-  .login-container.mobile-layout .form-box.Register {
-    order: 3;
-    padding: 24px 20px;
-  }
-
-  .login-container.active .form-box.Register {
-    pointer-events: auto;
-  }
-
-  .form-box.Register .animation {
-    transform: translateX(120%);
-    transition: 0.7s ease;
-    opacity: 0;
-    filter: blur(10px);
-    transition-delay: calc(0.1s * var(--S));
-  }
-
-  .login-container.active .form-box.Register .animation {
-    transform: translateX(0%);
-    opacity: 1;
-    filter: blur(0px);
-    transition-delay: calc(0.1s * var(--li));
-  }
-
-  /* Mobile: Register form animations */
-  .login-container.mobile-layout .form-box.Register .animation {
-    transform: translateY(30px);
-    opacity: 0;
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    transition-delay: calc(0.08s * var(--li));
-  }
-
-  .login-container.mobile-layout.active .form-box.Register .animation {
-    transform: translateY(0);
-    opacity: 1;
+  /* Old form-box compatibility (keeping for reference) */
+  .login-container .form-box {
+    display: none;
   }
 
   .form-box h2 {
-    font-size: 32px;
-    text-align: center;
+    display: none;
   }
 
-  .login-container.mobile-layout .form-box h2 {
-    font-size: 24px;
-    margin-bottom: 16px;
-  }
-
-  .form-box .input-box {
+  /* Form Elements */
+  .form-content .input-box {
     position: relative;
     width: 100%;
     height: 50px;
-    margin-top: 25px;
+    margin-top: 20px;
     padding-top: 10px;
     transition: all 0.3s ease;
   }
 
-  .login-container.mobile-layout .form-box .input-box {
-    margin-top: 16px;
+  .login-container.mobile-layout .form-content .input-box {
+    margin-top: 14px;
     height: auto;
   }
 
-  .form-box .input-box:has(button) {
+  .form-content .input-box:has(button) {
     height: auto;
     min-height: 50px;
   }
@@ -732,6 +697,40 @@ div[style*="background-color: white"][style*="font-weight: 500"] {
     font-size: 12px;
   }
 
+  /* Form Link - New structure */
+  .form-link {
+    font-size: 13px;
+    text-align: center;
+    margin: 16px 0 8px;
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
+  }
+
+  .form-link p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .form-link a {
+    text-decoration: none;
+    color: #06b6d4;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    z-index: 11;
+    pointer-events: auto;
+  }
+
+  .form-link a:hover {
+    text-decoration: underline;
+  }
+
+  .login-container.mobile-layout .form-link {
+    margin: 10px 0 6px;
+    font-size: 12px;
+  }
+
   .regi-link a {
     text-decoration: none;
     color: #06b6d4;
@@ -749,6 +748,7 @@ div[style*="background-color: white"][style*="font-weight: 500"] {
   /* Info Content - Welcome Section */
   .info-content {
     position: absolute;
+    right: 0;
     top: 0;
     height: 100%;
     width: 50%;
@@ -757,6 +757,8 @@ div[style*="background-color: white"][style*="font-weight: 500"] {
     flex-direction: column;
     z-index: 1;
     pointer-events: none;
+    text-align: right;
+    padding: 0 40px 60px 150px;
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
@@ -765,90 +767,67 @@ div[style*="background-color: white"][style*="font-weight: 500"] {
     position: relative;
     width: 100%;
     height: auto;
+    right: auto;
     top: auto;
-    padding: 24px 20px;
-    order: 1;
-  }
-
-  .info-content.Login {
-    right: 0;
-    text-align: right;
-    padding: 0 40px 60px 150px;
-  }
-
-  .login-container.mobile-layout .info-content.Login {
-    text-align: center;
     padding: 20px 16px;
-    order: 1;
+    text-align: center;
   }
 
-  .info-content.Login .animation {
+  .info-content.login-mode {
     transform: translateX(0);
-    transition: 0.7s ease;
-    transition-delay: calc(0.1s * var(--S));
     opacity: 1;
     filter: blur(0px);
   }
 
-  .login-container.active .info-content.Login .animation {
+  .info-content.register-mode {
     transform: translateX(120%);
     opacity: 0;
     filter: blur(10px);
-    transition-delay: calc(0.1s * var(--D));
   }
 
-  /* Mobile: Welcome section slide down animation */
-  .login-container.mobile-layout .info-content.Login .animation {
-    transform: translateY(-30px);
-    opacity: 0;
-    filter: blur(0);
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    transition-delay: calc(0.08s * var(--S));
-  }
-
-  .login-container.mobile-layout.active .info-content.Login .animation {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  .info-content.Register {
-    left: 0;
-    text-align: left;
-    padding: 0 150px 60px 38px;
-    pointer-events: none;
-  }
-
-  .login-container.mobile-layout .info-content.Register {
-    display: none;
-  }
-
-  .info-content.Register .animation {
-    transform: translateX(-120%);
-    transition: 0.7s ease;
-    opacity: 0;
-    filter: blur(10px);
-    transition-delay: calc(0.1s * var(--S));
-  }
-
-  .login-container.active .info-content.Register .animation {
-    transform: translateX(0%);
-    opacity: 1;
-    filter: blur(0);
-    transition-delay: calc(0.1s * var(--li));
-  }
-
-  .info-content h2 {
+  .info-content h3 {
     text-transform: uppercase;
     font-size: 36px;
     line-height: 1.3;
+    margin: 0 0 12px 0;
+    font-weight: 700;
   }
 
-  .login-container.mobile-layout .info-content h2 {
+  .login-container.mobile-layout .info-content h3 {
     font-size: 20px;
     margin-bottom: 8px;
   }
 
   .info-content p {
+    font-size: 16px;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .login-container.mobile-layout .info-content p {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  /* Old info-content selectors for compatibility */
+  .info-content.Login {
+    display: none;
+  }
+
+  .info-content.Register {
+    display: none;
+  }
+
+  .info-content.Login .animation {
+    display: none;
+  }
+
+  .info-content.Register .animation {
+    display: none;
+  }
+
+  .info-content h2 {
+    display: none;
     font-size: 16px;
   }
 

@@ -404,177 +404,168 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center py-6 px-2 sm:px-4" style={{ background: '#25252b' }}>
       <div className={`login-container ${containerActive ? 'active' : ''} ${isMobile ? 'mobile-layout' : 'desktop-layout'}`} style={{ margin: 'auto' }}>
+        {/* Curved shapes for desktop */}
         <div className="curved-shape"></div>
         <div className="curved-shape2"></div>
         
-        {/* Login Form */}
-        <div className="form-box Login">
-          <h2 className="animation" style={{ '--D': 0, '--S': 21 }}>Login</h2>
-          <form onSubmit={(e) => {
-            e.preventDefault()
-            if (mode === 'signin') {
-              handleSignIn(e)
-            }
-          }}>
-            {error && mode === 'signin' && (
-              <div className="error-message animation" style={{ '--D': 0.5, '--S': 21.5 }}>{error}</div>
-            )}
-            <div className="input-box animation" style={{ '--D': 1, '--S': 22 }}>
-              <input
-                type="email"
-                required
-                value={formData.email}
-                onChange={(e) => setFormData({...formData, email: e.target.value})}
-              />
-              <label>Email</label>
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
-            </div>
-            <div className="input-box animation" style={{ '--D': 2, '--S': 23 }}>
-              <input
-                type="password"
-                required
-                value={formData.password}
-                onChange={(e) => setFormData({...formData, password: e.target.value})}
-              />
-              <label>Password</label>
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-              </svg>
-            </div>
-            {mode === 'signin' && animationComplete && (
-              <button 
-                className="login-btn" 
-                type="submit" 
-                disabled={loading}
-                onClick={(e) => {
-                  if (mode !== 'signin') {
-                    e.preventDefault()
-                  }
-                }}
-              >
-                {loading ? 'Signing in...' : 'Login'}
-              </button>
-            )}
-            <div className="regi-link animation" style={{ '--D': 4, '--S': 25 }}>
-              <p>Don't have an account? <br /> 
-                <a 
-                  href="#" 
-                  className="SignUpLink" 
+        {/* Fixed Header Section */}
+        <div className="login-header">
+          <h2 className="login-title">
+            {mode === 'signin' ? 'Login' : 'Register'}
+          </h2>
+        </div>
+
+        {/* Form Content Wrapper - Only this animates */}
+        <div className="form-wrapper">
+          {/* Login Form */}
+          <div className={`form-content ${mode === 'signin' ? 'active' : ''}`}>
+            <form onSubmit={(e) => {
+              e.preventDefault()
+              if (mode === 'signin') {
+                handleSignIn(e)
+              }
+            }}>
+              {error && mode === 'signin' && (
+                <div className="error-message">{error}</div>
+              )}
+              <div className="input-box">
+                <input
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                />
+                <label>Email</label>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </div>
+              <div className="input-box">
+                <input
+                  type="password"
+                  required
+                  value={formData.password}
+                  onChange={(e) => setFormData({...formData, password: e.target.value})}
+                />
+                <label>Password</label>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              {mode === 'signin' && animationComplete && (
+                <button 
+                  className="login-btn" 
+                  type="submit" 
+                  disabled={loading}
+                >
+                  {loading ? 'Signing in...' : 'Login'}
+                </button>
+              )}
+              <div className="form-link">
+                <p>Don't have an account? <br /> 
+                  <a 
+                    href="#" 
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      setMode('signup')
+                      setError('')
+                      setFormData({...formData, password: '', name: '', otp: ''})
+                    }}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    Sign Up
+                  </a>
+                </p>
+              </div>
+            </form>
+          </div>
+
+          {/* Register Form */}
+          <div className={`form-content ${mode === 'signup' ? 'active' : ''}`}>
+            <form onSubmit={(e) => {
+              e.preventDefault()
+              if (mode === 'signup') {
+                handleSignUpSubmit(e)
+              }
+            }}>
+              {error && mode === 'signup' && (
+                <div className="error-message">{error}</div>
+              )}
+              <div className="input-box">
+                <input
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                />
+                <label>Email</label>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div className="input-box">
+                <input
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                />
+                <label>Name (Optional)</label>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </div>
+              {mode === 'signup' && animationComplete && (
+                <button 
+                  className="login-btn" 
+                  type="submit" 
+                  disabled={loading}
+                >
+                  {loading ? 'Sending OTP...' : 'Register'}
+                </button>
+              )}
+              <div className="form-link">
+                <p>Already have an account? <br />
+                  <a 
+                    href="#" 
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      setMode('signin')
+                      setError('')
+                      setFormData({...formData, password: '', name: '', otp: ''})
+                    }}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    Sign In
+                  </a>
+                </p>
+              </div>
+              <div style={{ textAlign: 'center', marginTop: '15px' }}>
+                <div style={{ color: '#ccc', fontSize: '14px', marginBottom: '10px' }}>Or</div>
+                <button
+                  type="button"
                   onClick={(e) => {
                     e.preventDefault()
                     e.stopPropagation()
-                    setMode('signup')
-                    setError('')
-                    setFormData({...formData, password: '', name: '', otp: ''})
+                    if (mode === 'signup') {
+                      handleGoogleLogin()
+                    }
                   }}
-                  style={{ cursor: 'pointer' }}
+                  disabled={loading || mode !== 'signup'}
+                  className="login-btn"
                 >
-                  Sign Up
-                </a>
-              </p>
-            </div>
-          </form>
+                  {loading ? 'Connecting...' : 'Connect with Google'}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
 
-        {/* Register Form */}
-        <div className="form-box Register">
-          <h2 className="animation" style={{ '--li': 17, '--S': 0 }}>Register</h2>
-          <form onSubmit={(e) => {
-            e.preventDefault()
-            if (mode === 'signup') {
-              handleSignUpSubmit(e)
-            }
-          }}>
-            {error && mode === 'signup' && (
-              <div className="error-message animation" style={{ '--li': 16.5, '--S': 0.5 }}>{error}</div>
-            )}
-            <div className="input-box animation" style={{ '--li': 18, '--S': 1 }}>
-              <input
-                type="email"
-                required
-                value={formData.email}
-                onChange={(e) => setFormData({...formData, email: e.target.value})}
-              />
-              <label>Email</label>
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <div className="input-box animation" style={{ '--li': 19, '--S': 2 }}>
-              <input
-                type="text"
-                value={formData.name}
-                onChange={(e) => setFormData({...formData, name: e.target.value})}
-              />
-              <label>Name (Optional)</label>
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
-            </div>
-            {mode === 'signup' && animationComplete && (
-              <button 
-                className="login-btn" 
-                type="submit" 
-                disabled={loading}
-                onClick={(e) => {
-                  if (mode !== 'signup') {
-                    e.preventDefault()
-                  }
-                }}
-              >
-                {loading ? 'Sending OTP...' : 'Register'}
-              </button>
-            )}
-            <div className="regi-link animation" style={{ '--li': 21, '--S': 4 }}>
-              <p>Already have an account? <br />
-                <a 
-                  href="#" 
-                  className="SignInLink" 
-                  onClick={(e) => {
-                    e.preventDefault()
-                    e.stopPropagation()
-                    setMode('signin')
-                    setError('')
-                    setFormData({...formData, password: '', name: '', otp: ''})
-                  }}
-                  style={{ cursor: 'pointer' }}
-                >
-                  Sign In
-                </a>
-              </p>
-            </div>
-            <div className="animation" style={{ '--li': 21.5, '--S': 4.5, textAlign: 'center', marginTop: '15px' }}>
-              <div style={{ color: '#ccc', fontSize: '14px', marginBottom: '10px' }}>Or</div>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  if (mode === 'signup') {
-                    handleGoogleLogin()
-                  }
-                }}
-                disabled={loading || mode !== 'signup'}
-                className="login-btn"
-              >
-                {loading ? 'Connecting...' : 'Connect with Google'}
-              </button>
-            </div>
-          </form>
-        </div>
-
-        {/* Info Content - Login */}
-        <div className="info-content Login">
-          <h2 className="animation" style={{ '--D': 0, '--S': 20 }}>WELCOME BACK!</h2>
-          <p className="animation" style={{ '--D': 1, '--S': 21 }}>We are happy to have you with us again. If you need anything, we are here to help.</p>
-        </div>
-
-        {/* Info Content - Register */}
-        <div className="info-content Register">
-          <h2 className="animation" style={{ '--li': 17, '--S': 0 }}>WELCOME!</h2>
-          <p className="animation" style={{ '--li': 18, '--S': 1 }}>We're delighted to have you here. If you need any assistance, feel free to reach out.</p>
+        {/* Welcome Section - Info Content */}
+        <div className={`info-content ${mode === 'signup' ? 'register-mode' : 'login-mode'}`}>
+          <h3>{mode === 'signin' ? 'WELCOME BACK!' : 'WELCOME!'}</h3>
+          <p>{mode === 'signin' ? 'We are happy to have you with us again. If you need anything, we are here to help.' : 'We\'re delighted to have you here. If you need any assistance, feel free to reach out.'}</p>
         </div>
       </div>
     </div>
