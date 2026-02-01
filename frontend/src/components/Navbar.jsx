@@ -35,7 +35,7 @@ export default function Navbar() {
             <Link to="/" className="flex items-center px-2 py-2 text-xl font-bold hover:opacity-80 transition-all duration-200">
               <div className="h-10 w-10 rounded-full overflow-hidden mr-2 flex items-center justify-center" style={{ background: 'rgba(6, 182, 212, 0.1)', border: '2px solid rgba(6, 182, 212, 0.3)' }}>
                 <img 
-                  src="/logo.png" 
+                  src="/logo.svg" 
                   alt="Sudharshini Stock Management Logo" 
                   className="h-full w-full object-cover"
                   onError={(e) => {

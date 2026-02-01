@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Sudharshini Stock Management">
+  <defs>
+    <linearGradient id="ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0ea5e9" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e3a8a" />
+      <stop offset="100%" stop-color="#0ea5e9" />
+    </linearGradient>
+    <linearGradient id="bars" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#1e3a8a" />
+    </linearGradient>
+  </defs>
+
+  <circle cx="256" cy="256" r="232" fill="#ffffff" stroke="url(#ring)" stroke-width="16" />
+  <circle cx="256" cy="256" r="214" fill="none" stroke="#e2e8f0" stroke-width="4" />
+
+  <g transform="translate(128 120)">
+    <rect x="0" y="180" width="40" height="80" fill="url(#bars)" rx="6" />
+    <rect x="56" y="150" width="40" height="110" fill="url(#bars)" rx="6" />
+    <rect x="112" y="120" width="40" height="140" fill="url(#bars)" rx="6" />
+    <rect x="168" y="90" width="40" height="170" fill="url(#bars)" rx="6" />
+    <rect x="224" y="60" width="40" height="200" fill="url(#bars)" rx="6" />
+
+    <path d="M12 160 L108 96 L176 72 L244 40" fill="none" stroke="url(#accent)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M244 40 L234 70 L270 58 Z" fill="url(#accent)" />
+
+    <g transform="translate(78 88)">
+      <circle cx="0" cy="0" r="18" fill="#0ea5e9" />
+      <circle cx="0" cy="0" r="7" fill="#ffffff" />
+    </g>
+    <g transform="translate(144 72)">
+      <circle cx="0" cy="0" r="22" fill="#10b981" />
+      <circle cx="0" cy="0" r="8" fill="#ffffff" />
+    </g>
+    <g transform="translate(208 52)">
+      <circle cx="0" cy="0" r="16" fill="#1e3a8a" />
+      <circle cx="0" cy="0" r="6" fill="#ffffff" />
+    </g>
+  </g>
+
+  <g text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">
+    <text x="256" y="372" font-size="44" font-weight="700" fill="#1e3a8a" letter-spacing="2">SUDHARSHINI</text>
+    <text x="256" y="408" font-size="18" font-weight="600" fill="#64748b" letter-spacing="3">STOCK MANAGEMENT</text>
+  </g>
+</svg>

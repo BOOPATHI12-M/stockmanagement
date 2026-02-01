@@ -18,7 +18,7 @@ function LogoDisplay() {
   
   return (
     <img 
-      src="/logo.png" 
+      src="/logo.svg" 
       alt="Stock Management Logo" 
       className="w-auto object-contain"
       style={{ maxHeight: '150px', maxWidth: '100%' }}

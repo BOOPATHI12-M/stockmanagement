@@ -24,8 +24,15 @@ export default function MobileNavbar() {
       <div className="flex items-center justify-between px-4 py-3">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2" onClick={closeMenu}>
-          <div className="w-8 h-8 bg-cyan-500 rounded-full flex items-center justify-center">
-            <span className="text-white font-bold text-lg">S</span>
+          <div className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center" style={{ background: 'rgba(6, 182, 212, 0.15)', border: '2px solid rgba(6, 182, 212, 0.5)' }}>
+            <img
+              src="/logo.svg"
+              alt="Sudharshini Stock Management Logo"
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                e.target.style.display = 'none'
+              }}
+            />
           </div>
           <span className="font-bold text-lg">Sudharshini</span>
         </Link>
