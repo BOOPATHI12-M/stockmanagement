@@ -1,4 +1,4 @@
-# Sudharshini Stock Management System
+# Stock Management System
 
 A complete full-stack stock management system with customer ordering, admin dashboard, order tracking, email notifications, and WhatsApp bot integration.
 
