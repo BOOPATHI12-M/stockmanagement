@@ -19,6 +19,9 @@ public interface AddressRepository extends JpaRepository<Address, Long> {
     
     @Modifying
     @Transactional
-    @Query(value = "UPDATE addresses SET is_default = 0 WHERE user_id = :userId", nativeQuery = true)
+    // JPQL, not native SQL: is_default is a real boolean column on PostgreSQL,
+    // so the old "SET is_default = 0" was rejected as an integer/boolean type
+    // mismatch. SQLite accepted it because it is dynamically typed.
+    @Query("UPDATE Address a SET a.isDefault = false WHERE a.userId = :userId")
     void clearDefaultAddresses(@Param("userId") Long userId);
 }

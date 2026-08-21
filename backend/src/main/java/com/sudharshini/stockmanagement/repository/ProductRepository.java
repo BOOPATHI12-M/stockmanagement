@@ -2,18 +2,25 @@ package com.sudharshini.stockmanagement.repository;
 
 import com.sudharshini.stockmanagement.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByStockQuantityLessThan(Integer quantity);
     
-    // Find products expiring within 15 days using native SQLite query
-    // Fallback: if this fails, we'll handle it in the service layer
-    @Query(value = "SELECT * FROM products WHERE expiry_date IS NOT NULL AND expiry_date >= date('now') AND expiry_date <= date('now', '+15 days')", nativeQuery = true)
-    List<Product> findNearExpiryProducts();
+    // Derived query so Hibernate emits SQL for whichever dialect is active.
+    // The previous native query used SQLite's date('now', '+15 days'), which
+    // does not exist in PostgreSQL. BETWEEN is inclusive at both ends and
+    // skips NULL expiry dates, matching the old behaviour.
+    List<Product> findByExpiryDateBetween(LocalDate start, LocalDate end);
+
+    /** Products expiring within the next 15 days (inclusive of today). */
+    default List<Product> findNearExpiryProducts() {
+        LocalDate today = LocalDate.now();
+        return findByExpiryDateBetween(today, today.plusDays(15));
+    }
 }
 
