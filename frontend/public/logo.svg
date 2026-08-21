@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Stock Management logo">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="96" fill="url(#bg)" />
+
+  <!-- Rotating supply-cycle arrows -->
+  <g fill="none" stroke-width="34" stroke-linecap="butt">
+    <path d="M 423.4 285.5 A 170 170 0 0 1 308.5 417.7" stroke="#06b6d4" />
+    <path d="M 226.5 423.4 A 170 170 0 0 1 94.3 308.5" stroke="#3b82f6" />
+    <path d="M 88.6 226.5 A 170 170 0 0 1 203.5 94.3" stroke="#22c55e" />
+    <path d="M 285.5 88.6 A 170 170 0 0 1 417.7 203.5" stroke="#14b8a6" />
+  </g>
+  <g stroke="none">
+    <path d="M 317.8 446.2 L 299.3 389.2 L 250.1 425.9 Z" fill="#06b6d4" />
+    <path d="M 65.8 317.8 L 122.8 299.3 L 86.1 250.1 Z" fill="#3b82f6" />
+    <path d="M 194.2 65.8 L 212.7 122.8 L 261.9 86.1 Z" fill="#22c55e" />
+    <path d="M 446.2 194.2 L 389.2 212.7 L 425.9 261.9 Z" fill="#14b8a6" />
+  </g>
+
+  <!-- Center box -->
+  <g transform="translate(148,148) scale(9)" fill="none" stroke="#e2e8f0"
+     stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+  </g>
+</svg>

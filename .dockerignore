@@ -1,0 +1,39 @@
+# Build context for backend/Dockerfile is the REPO ROOT, so everything the
+# backend image doesn't need must be excluded here or it gets uploaded to the
+# daemon on every build. Only backend/pom.xml and backend/src are required.
+
+# VCS / docs / editors
+.git
+.gitignore
+.github
+*.md
+.vscode
+.idea
+*.iml
+
+# Node / frontend
+node_modules
+**/node_modules
+frontend
+package.json
+package-lock.json
+
+# Runtime data and stray files
+uploads
+tokens
+assets
+*.db
+*.db-journal
+*.log
+jav.java
+
+# Backend build leftovers (the image builds from source in-container)
+backend/target
+backend/*.db
+backend/*.db-journal
+backend/.mvn
+backend/mvnw
+backend/mvnw.cmd
+backend/*.bat
+backend/pom-no-lombok.xml
+backend/.env.render.example

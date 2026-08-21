@@ -3,8 +3,10 @@ backend/target/
 backend/*.db
 backend/*.db-journal
 
+# Node (any depth: root tooling deps, frontend, etc.)
+node_modules/
+
 # Frontend
-frontend/node_modules/
 frontend/dist/
 
 # IDE

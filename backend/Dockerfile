@@ -2,10 +2,13 @@
 FROM maven:3.9-eclipse-temurin-17-alpine AS build
 WORKDIR /app
 
-COPY pom.xml .
+# NOTE: these paths are relative to the Docker build context, which on Render
+# is the REPO ROOT (the service's "Root Directory" is left blank). Hence the
+# backend/ prefix. If you ever set Root Directory=backend, drop the prefix.
+COPY backend/pom.xml .
 RUN mvn -B -DskipTests dependency:go-offline
 
-COPY src ./src
+COPY backend/src ./src
 RUN mvn -B -DskipTests clean package
 
 # Stage 2: Runtime
