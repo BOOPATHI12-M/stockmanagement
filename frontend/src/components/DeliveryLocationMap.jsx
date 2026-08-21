@@ -22,7 +22,7 @@ export default function DeliveryLocationMap({ pincode, address, orderId }) {
         `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(pincode + ', India')}&format=json&limit=1&addressdetails=1`,
         {
           headers: {
-            'User-Agent': 'Sudharshini-Stock-Management/1.0'
+            'User-Agent': 'Stock-Management/1.0'
           }
         }
       )

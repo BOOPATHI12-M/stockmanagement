@@ -27,14 +27,14 @@ export default function MobileNavbar() {
           <div className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center" style={{ background: 'rgba(6, 182, 212, 0.15)', border: '2px solid rgba(6, 182, 212, 0.5)' }}>
             <img
               src="/logo.png"
-              alt="Sudharshini Stock Management Logo"
+              alt="Stock Management Logo"
               className="w-full h-full object-cover"
               onError={(e) => {
                 e.target.style.display = 'none'
               }}
             />
           </div>
-          <span className="font-bold text-lg">Sudharshini</span>
+          <span className="font-bold text-lg">Stock Management</span>
         </Link>
 
         {/* Hamburger Button */}

@@ -584,8 +584,8 @@ export default function Profile() {
     <div class="header">
       <h1>INVOICE</h1>
       <div class="company-info">
-        <p><strong>Sudharshini Stock Management</strong></p>
-        <p>Email: stockmanagement@sudharshini.in</p>
+        <p><strong>Stock Management</strong></p>
+        <p>Email: info@stockmanagement.in</p>
       </div>
     </div>
     
@@ -1440,7 +1440,7 @@ export default function Profile() {
                       { title: 'Help Center', desc: 'Find answers to common questions', icon: '📚', color: 'from-blue-500 to-cyan-500', action: 'Visit' },
                       { title: 'Returns & Refunds', desc: 'Manage your returns and refunds', icon: '↩️', color: 'from-purple-500 to-pink-500', action: 'View' },
                       { title: 'Chat with Support', desc: 'Get instant help from our team', icon: '💬', color: 'from-green-500 to-emerald-500', action: 'Start Chat' },
-                      { title: 'Contact Us', desc: 'Email: support@sudharshini.in', icon: '📧', color: 'from-orange-500 to-red-500', action: 'Contact' }
+                      { title: 'Contact Us', desc: 'Email: support@stockmanagement.in', icon: '📧', color: 'from-orange-500 to-red-500', action: 'Contact' }
                     ].map((item, index) => (
                       <div key={index} className={`bg-gradient-to-br ${item.color} rounded-xl p-6 text-white hover:shadow-xl transition-all cursor-pointer transform hover:scale-105`}>
                         <div className="text-4xl mb-3">{item.icon}</div>

@@ -36,7 +36,7 @@ export default function Navbar() {
               <div className="h-10 w-10 rounded-full overflow-hidden mr-2 flex items-center justify-center" style={{ background: 'rgba(6, 182, 212, 0.1)', border: '2px solid rgba(6, 182, 212, 0.3)' }}>
                 <img 
                   src="/logo.png" 
-                  alt="Sudharshini Stock Management Logo" 
+                  alt="Stock Management Logo"
                   className="h-full w-full object-cover"
                   onError={(e) => {
                     // Fallback to SVG if image fails to load
@@ -49,8 +49,8 @@ export default function Navbar() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                 </svg>
               </div>
-              <span style={{ color: '#06b6d4' }}>Sudharshini</span>
-              <span style={{ color: '#06b6d4' }}> Stock</span>
+              <span style={{ color: '#06b6d4' }}>Stock</span>
+              <span style={{ color: '#06b6d4' }}> Management</span>
             </Link>
           </div>
 
