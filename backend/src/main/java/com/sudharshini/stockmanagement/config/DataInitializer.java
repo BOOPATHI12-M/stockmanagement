@@ -7,6 +7,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -38,26 +39,36 @@ public class DataInitializer implements CommandLineRunner {
     
     @PersistenceContext
     private EntityManager entityManager;
-    
+
+    @Value("${spring.datasource.url:}")
+    private String datasourceUrl;
+
     @Override
     @Transactional
     public void run(String... args) throws Exception {
         System.out.println("🚀 Starting DataInitializer...");
-        
-        // Migrate database schema to support DELIVERY_MAN role
-        try {
-            migrateDatabaseSchema();
-        } catch (Exception e) {
-            System.err.println("⚠️  Migration failed but continuing: " + e.getMessage());
-            // Continue anyway - we'll handle errors when creating delivery man
-        }
-        
-        // Migrate orders table to support ACCEPTED and PICKED_UP statuses
-        try {
-            migrateOrdersTableSchema();
-        } catch (Exception e) {
-            System.err.println("⚠️  Orders table migration failed but continuing: " + e.getMessage());
-            // Continue anyway
+
+        // The schema migrations below query sqlite_master, which only exists in SQLite.
+        // On PostgreSQL that query fails and aborts the whole transaction, so every
+        // later statement in run() fails too and the application shuts down.
+        if (datasourceUrl.startsWith("jdbc:sqlite:")) {
+            // Migrate database schema to support DELIVERY_MAN role
+            try {
+                migrateDatabaseSchema();
+            } catch (Exception e) {
+                System.err.println("⚠️  Migration failed but continuing: " + e.getMessage());
+                // Continue anyway - we'll handle errors when creating delivery man
+            }
+
+            // Migrate orders table to support ACCEPTED and PICKED_UP statuses
+            try {
+                migrateOrdersTableSchema();
+            } catch (Exception e) {
+                System.err.println("⚠️  Orders table migration failed but continuing: " + e.getMessage());
+                // Continue anyway
+            }
+        } else {
+            System.out.println("ℹ️  Skipping SQLite schema migrations (not a SQLite database).");
         }
         
         // Create default admin user if it doesn't exist
