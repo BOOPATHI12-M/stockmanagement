@@ -29,10 +29,10 @@ public class EmailService {
     private String adminEmail;
 
     // SendGrid configuration from environment (optional). When present, we use HTTP API.
-    @Value("${SENDGRID_API_KEY:}")
+    @Value("${sendgrid.api.key:}")
     private String sendGridApiKey;
 
-    @Value("${MAIL_FROM:${MAIL_USERNAME:}}")
+    @Value("${mail.from:}")
     private String mailFrom;
     
     public EmailService() {
